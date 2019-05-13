@@ -1,0 +1,33 @@
+.top-title{
+	height: 200px;
+	padding-top: 140px;
+  font-size: 30px;
+  font-family: "fantasy"
+}
+.top-img{
+  height: 300px;
+  padding: 40px
+}
+.main_text{
+  padding-top: 100px;
+  padding-bottom: 50px;
+  transition: font-size 2s; /*transitionは通常時にセット*/
+  -webkit-transition: font-size 2s;
+}
+.main_text:hover {
+  font-size: 20px;
+}
+.main_pic{
+  padding-top: 60px;
+}
+.top-title:hover {
+    display: block;
+    animation: hurueru .5s  infinite;
+}
+@keyframes hurueru {
+    0% {transform: translate(0px, 0px) rotateZ(0deg)}
+    25% {transform: translate(2px, 2px) rotateZ(1deg)}
+    50% {transform: translate(0px, 2px) rotateZ(0deg)}
+    75% {transform: translate(2px, 0px) rotateZ(-1deg)}
+    100% {transform: translate(0px, 0px) rotateZ(0deg)}
+}
