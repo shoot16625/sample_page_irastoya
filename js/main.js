@@ -1,6 +1,20 @@
 $(function(){
-            $("#footer").load("../src/footer.html");
-          })
+    $("#footer").load("../src/footer.html");
+})
+
+$(function(){
+    $('.row').css('visibility','hidden');
+    $(window).scroll(function(){
+     var windowHeight = $(window).height(),
+     topWindow = $(window).scrollTop();
+     $('.row').each(function(){
+      var targetPosition = $(this).offset().top;
+      if(topWindow > targetPosition - windowHeight + 100){
+       $(this).addClass("fadeInDown");
+   }
+});
+ });
+})
 
 // function map_initialize() {
 //   // 地図を表示する際のオプションを設定
@@ -17,7 +31,7 @@ $(function(){
 
 var mayMap;
 var service;
- 
+
 // マップの初期設定
 function initialize() {
     // Mapクラスのインスタンスを作成（緯度経度は池袋駅に設定）
@@ -39,7 +53,7 @@ function initialize() {
     var service = new google.maps.places.PlacesService(myMap);
     service.search(request, Result_Places);
 }
- 
+
 // 検索結果を受け取る
 function Result_Places(results, status){
     // Placesが検家に成功したかとマうかをチェック
@@ -48,13 +62,13 @@ function Result_Places(results, status){
             // 検索結果の数だけ反復処理を変数placeに格納
             var place = results[i];
             createMarker({
-                 text : place.name, 
-                 position : place.geometry.location
-            });
+               text : place.name, 
+               position : place.geometry.location
+           });
         }
     }
 }
- 
+
 // 入力キーワードと表示範囲を設定
 function SearchGo() {
     var initPos = new google.maps.LatLng(0,0);
@@ -75,21 +89,21 @@ function SearchGo() {
     };
     service.textSearch(request, result_search);
 }
- 
+
 // 検索の結果を受け取る
 function result_search(results, status) {
     var bounds = new google.maps.LatLngBounds();
     for(var i = 0; i < results.length; i++){
         createMarker({
-             position : results[i].geometry.location,
-             text : results[i].name,
-             map : myMap
-         });
+           position : results[i].geometry.location,
+           text : results[i].name,
+           map : myMap
+       });
         bounds.extend(results[i].geometry.location);
     }
     myMap.fitBounds(bounds);
 }
- 
+
 // 該当する位置にマーカーを表示
 function createMarker(options) {
     // マップ情報を保持しているmyMapオブジェクトを指定
@@ -105,6 +119,6 @@ function createMarker(options) {
     });
     return marker;
 }
- 
+
 // ページ読み込み完了後、Googleマップを表示
 google.maps.event.addDomListener(window, 'load', initialize);
