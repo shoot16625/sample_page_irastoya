@@ -122,3 +122,7 @@ function createMarker(options) {
 
 // ページ読み込み完了後、Googleマップを表示
 google.maps.event.addDomListener(window, 'load', initialize);
+
+ $('#myCarousel').carousel({
+    interval: 3000,
+ })
